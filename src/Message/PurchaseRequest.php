@@ -205,12 +205,6 @@ class PurchaseRequest extends AbstractRequest
         'hdFontType'
     );
 
-    protected $cardParamMapping = array(
-        'getName'       => 'CN',
-        'getEmail'      => 'EMAIL',
-        'getAddress'    => 'OWNERADDRESS'
-    );
-
     public function getData()
     {
         $this->validate('pspId', 'transactionId', 'amount', 'currency', 'language');

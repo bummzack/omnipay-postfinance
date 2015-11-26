@@ -100,6 +100,8 @@ class CompletePurchaseRequest extends AbstractRequest
             }
         }
 
+        //TODO: Deal with non-signed response?
+
         return $data;
     }
 
