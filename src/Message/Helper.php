@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bummzack
- * Date: 26/11/15
- * Time: 15:59
- */
 
 namespace Omnipay\Postfinance\Message;
 

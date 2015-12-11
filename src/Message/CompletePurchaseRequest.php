@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bummzack
- * Date: 26/11/15
- * Time: 14:52
- */
 
 namespace Omnipay\Postfinance\Message;
-
 
 use Omnipay\Common\Exception\InvalidResponseException;
 
@@ -108,5 +101,16 @@ class CompletePurchaseRequest extends AbstractRequest
     public function send()
     {
         return $this->response = new CompletePurchaseResponse($this, $this->getData());
+    }
+
+    /**
+     * Send the request with specified data
+     *
+     * @param  mixed $data The data to send
+     * @return ResponseInterface
+     */
+    public function sendData($data)
+    {
+        return new CompletePurchaseResponse($this, $data);
     }
 }
