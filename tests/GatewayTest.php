@@ -89,7 +89,7 @@ class GatewayTest extends GatewayTestCase
     public function testCompletePurchaseSuccess()
     {
         $data = array(
-            'STATUS' => 5,
+            'STATUS' => 9,
             'NCERROR' => 0,
             'orderID' => '1',
             'PAYID' => 'a'
@@ -132,7 +132,7 @@ class GatewayTest extends GatewayTestCase
     public function testCompletePurchaseInvalid()
     {
         $this->getHttpRequest()->query->replace(array(
-            'STATUS' => 5,
+            'STATUS' => 9,
             'NCERROR' => 0,
             'orderID' => '1',
             'PAYID' => 'a',

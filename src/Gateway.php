@@ -434,4 +434,26 @@ class Gateway extends AbstractGateway
         return $this->createRequest('\Omnipay\Postfinance\Message\CompletePurchaseRequest', $parameters);
     }
 
+    /**
+     * Start an authorize request
+     *
+     * @param array $parameters
+     * @return \Omnipay\Postfinance\Message\AuthorizeRequest
+     */
+    public function authorize(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Postfinance\Message\AuthorizeRequest', $parameters);
+    }
+
+    /**
+     * Complete an authorization
+     *
+     * @param array $parameters
+     * @return \Omnipay\Postfinance\Message\CompleteAuthorizeRequest
+     */
+    public function completeAuthorize(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Postfinance\Message\CompleteAuthorizeRequest', $parameters);
+    }
+
 }
