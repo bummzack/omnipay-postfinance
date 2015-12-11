@@ -9,7 +9,7 @@ namespace Omnipay\Postfinance\Message;
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
     /**
-     * Accessor for the PSP ID
+     * Get the PSPID
      * @return string
      */
     public function getPspId()
@@ -17,13 +17,19 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('pspId');
     }
 
+    /**
+     * Set the PSPID parameter. The PSPID is your postfinance account ID
+     * This is a mandatory parameter
+     * @param string $value your postfinance account ID
+     * @return $this
+     */
     public function setPspId($value)
     {
-        $this->setParameter('pspId', $value);
+        return $this->setParameter('pspId', $value);
     }
 
     /**
-     * Accessor for the SHA IN signature
+     * Get the SHAIN signature
      * @return string
      */
     public function getShaIn()
@@ -31,13 +37,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('shaIn');
     }
 
+    /**
+     * Set the SHA IN parameter
+     * @param string $value the SHAIN secret
+     * @return $this
+     */
     public function setShaIn($value)
     {
-        $this->setParameter('shaIn', $value);
+        return $this->setParameter('shaIn', $value);
     }
 
     /**
-     * Accessor for the SHA OUT signature
+     * Get the SHAOUT signature
      * @return string
      */
     public function getShaOut()
@@ -45,13 +56,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('shaOut');
     }
 
+    /**
+     * Set the SHAOUT parameter
+     * @param string $value the SHAOUT secret
+     * @return $this
+     */
     public function setShaOut($value)
     {
-        $this->setParameter('shaOut', $value);
+        return $this->setParameter('shaOut', $value);
     }
 
     /**
-     * Accessor for the hashing method to use.
+     * The hashing method to use for the SHA secrets
      * @return string
      */
     public function getHashingMethod()
@@ -60,16 +76,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     }
 
     /**
-     * Set the hashing method
+     * Set the hashing method.
+     * Important: this must be set to the same hashing-algorithm that is being set in the postfinance backend
      * @param string $value Valid values are: sha1, sha256, sha512
+     * @return $this
      */
     public function setHashingMethod($value)
     {
-        $this->setParameter('hashingMethod', $value);
+        return $this->setParameter('hashingMethod', $value);
     }
 
     /**
-     * Accessor for the encoding to use.
+     * Get the encoding that will be used by the payment gateway.
      * @return string
      */
     public function getEncoding()
@@ -78,16 +96,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     }
 
     /**
-     * Set the encoding
+     * Set the encoding that should be used by the gateway.
+     * If you're sending UTF-8 encoded values, make sure to set this to UTF-8!
      * @param string $value Valid values are: ISO-8859-1, UTF-8
+     * @return $this
      */
     public function setEncoding($value)
     {
-        $this->setParameter('encoding', $value);
+        return $this->setParameter('encoding', $value);
     }
 
     /**
-     * Accessor for the language
+     * Get the language/locale that should be used for the customer
      * @return string
      */
     public function getLanguage()
@@ -95,13 +115,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('language');
     }
 
+    /**
+     * Set the language/locale that should be used for the customer
+     * @param string $value a locale like: en_US, fr_FR etc.
+     * @return $this
+     */
     public function setLanguage($value)
     {
-        $this->setParameter('language', $value);
+        return $this->setParameter('language', $value);
     }
 
     /**
-     * Accessor for the custom template file
+     * Get the custom template file parameter.
      * @return string
      */
     public function getTP()
@@ -109,13 +134,22 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('tp');
     }
 
+    /**
+     * Set the custom template file parameter.
+     * Scope: Look & Feel of the payment page.
+     * @param string $value
+     *     Can be an absolute URL to your dynamic template,
+     *     Can be set to: template_STD_postfinance_1_mobile.htm to use the default Mobile template
+     *     Can be left blank to use the default template.
+     * @return $this
+     */
     public function setTP($value)
     {
-        $this->setParameter('tp', $value);
+        return $this->setParameter('tp', $value);
     }
 
     /**
-     * Accessor for the template title
+     * Get the template title parameter
      * @return string
      */
     public function getTitle()
@@ -123,13 +157,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('title');
     }
 
+    /**
+     * Set the template title parameter
+     * @param string $value the template title (eg. name of your shop)
+     * @return $this
+     */
     public function setTitle($value)
     {
-        $this->setParameter('title', $value);
+        return $this->setParameter('title', $value);
     }
 
     /**
-     * Accessor for the template background-color (defaults to white)
+     * Get the template background-color (defaults to white)
      * @return string
      */
     public function getBgColor()
@@ -137,13 +176,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('bgColor');
     }
 
+    /**
+     * Set the template background-color.
+     * @param string $value a hex color value, eg. #FFFFFF
+     * @return $this
+     */
     public function setBgColor($value)
     {
-        $this->setParameter('bgColor', $value);
+        return $this->setParameter('bgColor', $value);
     }
 
     /**
-     * Accessor for the template text-color (defaults to black)
+     * Get the template text-color (defaults to black)
      * @return string
      */
     public function getTxtColor()
@@ -151,13 +195,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('txtColor');
     }
 
+    /**
+     * Set the template text-color
+     * @param string $value a hex color value, eg. #000000
+     * @return $this
+     */
     public function setTxtColor($value)
     {
-        $this->setParameter('txtColor', $value);
+        return $this->setParameter('txtColor', $value);
     }
 
     /**
-     * Accessor for the template table-background-color (defaults to white)
+     * Get the template table-background-color (defaults to white)
      * @return string
      */
     public function getTblBgColor()
@@ -165,13 +214,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('tblBgColor');
     }
 
+    /**
+     * Set the template table-background-color (defaults to white)
+     * @param string $value a hex color value, eg. #FFFFFF
+     * @return $this
+     */
     public function setTblBgColor($value)
     {
-        $this->setParameter('tblBgColor', $value);
+        return $this->setParameter('tblBgColor', $value);
     }
 
     /**
-     * Accessor for the table-background-color for left column (iPhone template) (defaults to #00467F)
+     * Get the table-background-color for left column (iPhone template) (defaults to #00467F)
      * @return string
      */
     public function getHdTblBgColor()
@@ -179,13 +233,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('hdTblBgColor');
     }
 
+    /**
+     * Set the table-background-color for left column (iPhone template) (defaults to #00467F)
+     * @param string $value a hex color value, eg. #00467F
+     * @return $this
+     */
     public function setHdTblBgColor($value)
     {
-        $this->setParameter('hdTblBgColor', $value);
+        return $this->setParameter('hdTblBgColor', $value);
     }
 
     /**
-     * Accessor for the template table-text-color (defaults to black)
+     * Get the template table-text-color (defaults to black)
      * @return string
      */
     public function getTblTxtColor()
@@ -193,13 +252,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('tblTxtColor');
     }
 
+    /**
+     * Set the template table-text-color (defaults to black)
+     * @param string $value a hex color value, eg. #000000
+     * @return $this
+     */
     public function setTblTxtColor($value)
     {
-        $this->setParameter('tblTxtColor', $value);
+        return $this->setParameter('tblTxtColor', $value);
     }
 
     /**
-     * Accessor for the table-text-color for left column (iPhone template) (defaults to white)
+     * Get the table-text-color for left column (iPhone template) (defaults to white)
      * @return string
      */
     public function getHdTblTxtColor()
@@ -207,13 +271,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('hdTblTxtColor');
     }
 
+    /**
+     * Set the table-text-color for left column (iPhone template) (defaults to white)
+     * @param string $value a hex color value, eg. #FFFFFF
+     * @return $this
+     */
     public function setHdTblTxtColor($value)
     {
-        $this->setParameter('hdTblTxtColor', $value);
+        return $this->setParameter('hdTblTxtColor', $value);
     }
 
     /**
-     * Accessor for the template button background-color
+     * Get the template button background-color
      * @return string
      */
     public function getButtonBgColor()
@@ -221,13 +290,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('buttonBgColor');
     }
 
+    /**
+     * Set the template button background-color
+     * @param string $value a hex color value, eg. #FFFFFF
+     * @return $this
+     */
     public function setButtonBgColor($value)
     {
-        $this->setParameter('buttonBgColor', $value);
+        return $this->setParameter('buttonBgColor', $value);
     }
 
     /**
-     * Accessor for the template button text-color (defaults to black)
+     * Get the template button text-color (defaults to black)
      * @return string
      */
     public function getButtonTxtColor()
@@ -235,13 +309,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('buttonTxtColor');
     }
 
+    /**
+     * Set the template button text-color (defaults to black)
+     * @param string $value a hex color value, eg. #000000
+     * @return $this
+     */
     public function setButtonTxtColor($value)
     {
-        $this->setParameter('buttonTxtColor', $value);
+        return $this->setParameter('buttonTxtColor', $value);
     }
 
     /**
-     * Accessor for the template font (defaults to Verdana)
+     * Get the template font (defaults to Verdana)
      * @return string
      */
     public function getFontType()
@@ -249,13 +328,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('fontType');
     }
 
+    /**
+     * Set the template font
+     * @param string $value font face to use. A value such as "Arial" or "Verdana"
+     * @return $this
+     */
     public function setFontType($value)
     {
-        $this->setParameter('fontType', $value);
+        return $this->setParameter('fontType', $value);
     }
 
     /**
-     * Accessor for the font for left column (iPhone template) (defaults to Verdana)
+     * Get the font for left column (iPhone template) (defaults to Verdana)
      * @return string
      */
     public function getHdFontType()
@@ -263,13 +347,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('hdFontType');
     }
 
+    /**
+     * Set the font for left column (iPhone template) (defaults to Verdana)
+     * @param string $value font face to use. A value such as "Arial" or "Verdana"
+     * @return $this
+     */
     public function setHdFontType($value)
     {
-        $this->setParameter('hdFontType', $value);
+        return $this->setParameter('hdFontType', $value);
     }
 
     /**
-     * Accessor for the template logo. Must be stored on an https:// server
+     * Get the template logo. Must be stored on an https:// server
      * @return string
      */
     public function getLogo()
@@ -277,8 +366,13 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('logo');
     }
 
+    /**
+     * Set the template logo.
+     * @param string $value absolute URL to the logo to show on the payment page. Only https:// urls are accepted.
+     * @return $this
+     */
     public function setLogo($value)
     {
-        $this->setParameter('logo', $value);
+        return $this->setParameter('logo', $value);
     }
 }
