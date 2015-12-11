@@ -98,6 +98,7 @@ class CompletePurchaseRequest extends AbstractRequest
         return $data;
     }
 
+    // Sending the 1.x way
     public function send()
     {
         return $this->response = new CompletePurchaseResponse($this, $this->getData());
@@ -111,6 +112,6 @@ class CompletePurchaseRequest extends AbstractRequest
      */
     public function sendData($data)
     {
-        return new CompletePurchaseResponse($this, $data);
+        return $this->response = new CompletePurchaseResponse($this, $data);
     }
 }

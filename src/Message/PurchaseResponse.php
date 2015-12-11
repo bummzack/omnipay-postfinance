@@ -65,8 +65,4 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
             $req->getEncoding() == 'UTF-8' ? '_utf8' : ''
         );
     }
-
-
-
-
 }
