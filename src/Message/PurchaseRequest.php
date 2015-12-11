@@ -60,6 +60,8 @@ class PurchaseRequest extends AbstractRequest
         $data['EXCEPTIONURL']   = $this->getNotifyUrl();
         $data['DECLINEURL']     = $this->getNotifyUrl();
 
+        // perform a Sale operation
+        $data['OPERATION'] = Helper::POSTFINANCE_OPERATION_SALE;
 
         return $data;
     }

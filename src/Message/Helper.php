@@ -6,6 +6,12 @@ namespace Omnipay\Postfinance\Message;
 class Helper
 {
     /**
+     * Operational modes
+     */
+    const POSTFINANCE_OPERATION_SALE                      = 'SAL';
+    const POSTFINANCE_OPERATION_AUTHORIZE                 = 'RES';
+
+    /**
      * response status codes
      */
     const POSTFINANCE_INVALID                             = 0;
