@@ -73,6 +73,6 @@ class Helper
             $hashParts[] = strtoupper($key) . '=' . $str . $signature;
         }
 
-        return strtoupper(hash($algorithm, implode('', $hashParts)));
+        return strtoupper(hash(strtolower($algorithm), implode('', $hashParts)));
     }
 }

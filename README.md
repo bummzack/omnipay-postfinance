@@ -16,7 +16,6 @@ It is highly recommended to use SHA-IN and -OUT signatures for your requests.
 
 ```php
 $gateway = Omnipay::create('Postfinance');
-$gateway->setCurrency('CHF');
 $gateway->setPspId('myPspId');
 $gateway->setShaIn('MyShaInSecret');
 $gateway->setShaOut('MyShaOutSecret');

@@ -62,7 +62,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
         return sprintf(
             $this->endpointTemplate,
             $req->getTestMode() ? 'test' : 'prod',
-            $req->getEncoding() == 'UTF-8' ? '_utf8' : ''
+            strtolower($req->getEncoding()) == 'utf-8' ? '_utf8' : ''
         );
     }
 }

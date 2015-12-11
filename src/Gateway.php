@@ -101,7 +101,7 @@ class Gateway extends AbstractGateway
      */
     public function setHashingMethod($value)
     {
-        $this->setParameter('hashingMethod', strtolower($value));
+        $this->setParameter('hashingMethod', $value);
     }
 
     /**
@@ -119,7 +119,7 @@ class Gateway extends AbstractGateway
      */
     public function setEncoding($value)
     {
-        $this->setParameter('encoding', strtoupper($value));
+        $this->setParameter('encoding', $value);
     }
 
     /**
