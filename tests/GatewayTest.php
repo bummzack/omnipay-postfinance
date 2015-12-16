@@ -15,7 +15,7 @@ class GatewayTest extends GatewayTestCase
         $this->gateway->setPspId('testPspId');
         $this->gateway->setLanguage('en_US');
         $this->gateway->setShaIn('MyShaInSecret');
-        $this->gateway->setShaOut('MyShaOutSecret');
+        $this->gateway->setShaOut('Mysecretsig1875!?');
 
         $this->options = array(
             'amount' => '10.00',
@@ -25,16 +25,10 @@ class GatewayTest extends GatewayTestCase
         );
     }
 
-    public function testPurchase()
-    {
-        $response = $this->gateway->purchase($this->options)->send();
-
-        $this->assertInstanceOf('\Omnipay\Postfinance\Message\PurchaseResponse', $response);
-        $this->assertTrue($response->isRedirect());
-        $this->assertStringStartsWith('https://e-payment.postfinance.ch/ncol/', $response->getRedirectUrl());
-    }
-
-
+    /**
+     * Test SHA hashing of data.
+     * Use example data from the official documentation and ensure that the implmentation generates the same hashes.
+     */
     public function testSHASign()
     {
         $data = array(
@@ -85,25 +79,47 @@ class GatewayTest extends GatewayTestCase
         );
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Purchase
+    //------------------------------------------------------------------------------------------------------------------
+
+    public function testPurchase()
+    {
+        $response = $this->gateway->purchase($this->options)->send();
+
+        $this->assertEquals('SAL', $response->getData()['OPERATION']);
+        $this->assertInstanceOf('\Omnipay\Postfinance\Message\PurchaseResponse', $response);
+        $this->assertFalse($response->isSuccessful());
+        $this->assertTrue($response->isRedirect());
+        $this->assertEquals('POST', $response->getRedirectMethod());
+        $this->assertStringStartsWith('https://e-payment.postfinance.ch/ncol/', $response->getRedirectUrl());
+    }
 
     public function testCompletePurchaseSuccess()
     {
         $data = array(
-            'STATUS' => 9,
+            'BRAND' => 'VISA',
+            'ACCEPTANCE' => 1234,
+            'amount' => 15,
+            'CARDNO' => 'XXXXXXXXXXXX1111',
             'NCERROR' => 0,
-            'orderID' => '1',
-            'PAYID' => 'a'
+            'currency' => 'EUR',
+            'PAYID' => '32100123',
+            'PM' => 'CreditCard',
+            'orderID' => 12,
+            'STATUS' => 9,
+            'SHASIGN' => '209113288F93A9AB8E474EA78D899AFDBB874355'
         );
 
-        // create sha hash for the given data
-        $data['SHASIGN'] = Helper::create_sha_hash($data, $this->gateway->getShaOut());
 
         $this->getHttpRequest()->query->replace($data);
 
         $response = $this->gateway->completePurchase($this->options)->send();
 
+        $this->assertInstanceOf('\Omnipay\Postfinance\Message\CompletePurchaseResponse', $response);
+        $this->assertFalse($response->isRedirect());
         $this->assertTrue($response->isSuccessful());
-        $this->assertEquals('a', $response->getTransactionReference());
+        $this->assertEquals('32100123', $response->getTransactionReference());
     }
 
 
@@ -140,5 +156,80 @@ class GatewayTest extends GatewayTestCase
         ));
 
         $response = $this->gateway->completePurchase($this->options)->send();
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Authorize
+    //------------------------------------------------------------------------------------------------------------------
+
+    public function testAuthorize()
+    {
+        $response = $this->gateway->authorize($this->options)->send();
+
+        $this->assertEquals('RES', $response->getData()['OPERATION']);
+        $this->assertInstanceOf('\Omnipay\Postfinance\Message\PurchaseResponse', $response);
+        $this->assertFalse($response->isSuccessful());
+        $this->assertTrue($response->isRedirect());
+        $this->assertEquals('POST', $response->getRedirectMethod());
+        $this->assertStringStartsWith('https://e-payment.postfinance.ch/ncol/', $response->getRedirectUrl());
+    }
+
+    public function testCompleteAuthorizeSuccess()
+    {
+        $data = array(
+            'STATUS' => 5,
+            'NCERROR' => 0,
+            'orderID' => '1',
+            'amount' => 12,
+            'PAYID' => 'abc'
+        );
+
+        // create sha hash for the given data
+        $data['SHASIGN'] = Helper::create_sha_hash($data, $this->gateway->getShaOut());
+
+        $this->getHttpRequest()->query->replace($data);
+
+        $response = $this->gateway->completeAuthorize($this->options)->send();
+
+        $this->assertInstanceOf('\Omnipay\Postfinance\Message\CompleteAuthorizeResponse', $response);
+        $this->assertFalse($response->isRedirect());
+        $this->assertTrue($response->isSuccessful());
+        $this->assertEquals('abc', $response->getTransactionReference());
+    }
+
+
+    public function testCompleteAuthorizeError()
+    {
+        $data = array(
+            'STATUS' => 0,
+            'NCERROR' => 500,
+            'orderID' => '1',
+            'PAYID' => 'a'
+        );
+
+        // create sha hash for the given data
+        $data['SHASIGN'] = Helper::create_sha_hash($data, $this->gateway->getShaOut());
+
+        $this->getHttpRequest()->query->replace($data);
+
+        $response = $this->gateway->completeAuthorize($this->options)->send();
+
+        $this->assertFalse($response->isSuccessful());
+    }
+
+    /**
+     * @expectedException Omnipay\Common\Exception\InvalidResponseException
+     */
+    public function testCompleteAuthorizeInvalid()
+    {
+        $this->getHttpRequest()->query->replace(array(
+            'STATUS' => 9,
+            'NCERROR' => 0,
+            'orderID' => '1',
+            'PAYID' => 'a',
+            'SHASIGN' => 'InvalidHash'
+        ));
+
+        $response = $this->gateway->completeAuthorize($this->options)->send();
     }
 }
