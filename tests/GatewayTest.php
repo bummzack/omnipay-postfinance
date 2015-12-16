@@ -87,7 +87,6 @@ class GatewayTest extends GatewayTestCase
     {
         $response = $this->gateway->purchase($this->options)->send();
 
-        $this->assertEquals('SAL', $response->getData()['OPERATION']);
         $this->assertInstanceOf('\Omnipay\Postfinance\Message\PurchaseResponse', $response);
         $this->assertFalse($response->isSuccessful());
         $this->assertTrue($response->isRedirect());
@@ -191,7 +190,6 @@ class GatewayTest extends GatewayTestCase
 
         $response = $this->gateway->completeAuthorize($this->options)->send();
 
-        $this->assertInstanceOf('\Omnipay\Postfinance\Message\CompleteAuthorizeResponse', $response);
         $this->assertFalse($response->isRedirect());
         $this->assertTrue($response->isSuccessful());
         $this->assertEquals('abc', $response->getTransactionReference());

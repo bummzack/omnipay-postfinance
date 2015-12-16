@@ -22,6 +22,7 @@ class Gateway extends AbstractGateway
             'pspId'             => '',
             'shaIn'             => '',
             'shaOut'            => '',
+            'operation'         => '',
             'testMode'          => false,
             'hashingMethod'     => array('sha1', 'sha256', 'sha512'),
             'encoding'          => array('ISO-8859-1', 'UTF-8'),
@@ -100,6 +101,31 @@ class Gateway extends AbstractGateway
     public function setShaOut($value)
     {
         return $this->setParameter('shaOut', $value);
+    }
+
+    /**
+     * Get the payment operation.
+     *
+     * @return mixed
+     */
+    public function getOperation()
+    {
+        return $this->getParameter('operation');
+    }
+
+    /**
+     * Set the payment operation mode.
+     * Valid values are:
+     *  - leave blank to use the setting from the Postfinance backend
+     *  - 'RES' (request for authorization)
+     *  - 'SAL' (request for sale/purchase)
+     *  - 'PAU' (request for pre-authorization)
+     * @param $value
+     * @return $this
+     */
+    public function setOperation($value)
+    {
+        return $this->setParameter('operation', $value);
     }
 
     /**
@@ -453,7 +479,7 @@ class Gateway extends AbstractGateway
      */
     public function completeAuthorize(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Postfinance\Message\CompleteAuthorizeRequest', $parameters);
+        return $this->completePurchase($parameters);
     }
 
 }

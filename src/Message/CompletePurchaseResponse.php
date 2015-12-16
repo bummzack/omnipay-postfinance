@@ -13,7 +13,9 @@ class CompletePurchaseResponse extends AbstractResponse
 
     protected $validStates = array(
         Helper::POSTFINANCE_PAYMENT_REQUESTED,
-        Helper::POSTFINANCE_PAYMENT_PROCESSING
+        Helper::POSTFINANCE_PAYMENT_PROCESSING,
+        Helper::POSTFINANCE_AUTHORIZED,
+        Helper::POSTFINANCE_AUTHORIZED_WAITING
     );
 
     public function isSuccessful()

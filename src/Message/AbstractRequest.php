@@ -76,6 +76,31 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     }
 
     /**
+     * Get the payment operation.
+     *
+     * @return mixed
+     */
+    public function getOperation()
+    {
+        return $this->getParameter('operation');
+    }
+
+    /**
+     * Set the payment operation mode.
+     * Valid values are:
+     *  - leave blank to use the setting from the Postfinance backend
+     *  - 'RES' (request for authorization)
+     *  - 'SAL' (request for sale/purchase)
+     *  - 'PAU' (request for pre-authorization)
+     * @param $value
+     * @return $this
+     */
+    public function setOperation($value)
+    {
+        return $this->setParameter('operation', $value);
+    }
+
+    /**
      * Set the hashing method.
      * Important: this must be set to the same hashing-algorithm that is being set in the postfinance backend
      * @param string $value Valid values are: sha1, sha256, sha512
