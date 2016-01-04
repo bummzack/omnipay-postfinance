@@ -191,7 +191,7 @@ class Gateway extends AbstractGateway
      * Get the custom template file parameter.
      * @return string
      */
-    public function getTP()
+    public function getTp()
     {
         return $this->getParameter('tp');
     }
@@ -205,7 +205,7 @@ class Gateway extends AbstractGateway
      *     Can be left blank to use the default template.
      * @return $this
      */
-    public function setTP($value)
+    public function setTp($value)
     {
         return $this->setParameter('tp', $value);
     }

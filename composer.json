@@ -1,5 +1,5 @@
 {
-    "name": "omnipay/postfinance",
+    "name": "bummzack/omnipay-postfinance",
     "type": "library",
     "description": "Postfinance Gateway for the Omnipay payment processing library",
     "keywords": [
