@@ -36,7 +36,11 @@ class GatewayTest extends GatewayTestCase
             'ORDERID' => '1234',
             'AMOUNT' => 1500,
             'CURRENCY' => 'EUR',
-            'LANGUAGE' => 'en_US'
+            'LANGUAGE' => 'en_US',
+            // add a bogus SHASIGN data, it should be ignored during calculation of a hash
+            'SHASIGN' => 'bogus',
+            // add an empty value. Empty fields should be ignored as well!
+            'EMPTY_MUST_IGNORE' => ''
         );
 
         // reconstruct the hashes from the official documentation and ensure we calculate the same hashes
@@ -87,10 +91,29 @@ class GatewayTest extends GatewayTestCase
     {
         $response = $this->gateway->purchase($this->options)->send();
 
+        // Expected redirect-data for the default options
+        $data = array(
+            'PSPID' => 'testPspId',
+            'ORDERID' => '1',
+            'AMOUNT' => 1000,
+            'CURRENCY' => 'CHF',
+            'LANGUAGE' => 'en_US',
+            'COM' => null,
+            'ACCEPTURL' => 'https://www.example.com/return',
+            'CANCELURL' => null,
+            'EXCEPTIONURL' => null,
+            'DECLINEURL' => null,
+            'OPERATION' => ''
+        );
+
+        // sign the data
+        $data['SHASIGN'] = Helper::create_sha_hash($data, $this->gateway->getShaIn());
+
         $this->assertInstanceOf('\Omnipay\Postfinance\Message\PurchaseResponse', $response);
         $this->assertFalse($response->isSuccessful());
         $this->assertTrue($response->isRedirect());
         $this->assertEquals('POST', $response->getRedirectMethod());
+        $this->assertEquals($data, $response->getRedirectData());
         $this->assertStringStartsWith('https://e-payment.postfinance.ch/ncol/', $response->getRedirectUrl());
     }
 
@@ -119,6 +142,7 @@ class GatewayTest extends GatewayTestCase
         $this->assertFalse($response->isRedirect());
         $this->assertTrue($response->isSuccessful());
         $this->assertEquals('32100123', $response->getTransactionReference());
+        $this->assertEquals('', $response->getMessage());
     }
 
 
@@ -139,6 +163,7 @@ class GatewayTest extends GatewayTestCase
         $response = $this->gateway->completePurchase($this->options)->send();
 
         $this->assertFalse($response->isSuccessful());
+        $this->assertEquals(500, $response->getMessage());
     }
 
     /**
