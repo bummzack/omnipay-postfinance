@@ -4,7 +4,7 @@ Ominpay Gateway for Postfinance.
 
 This Gateway implements offsite payments via Postfinance. Purchase and Authorization are available, capturing an authorized payment has to be performed via Postfinance backend though (not currently implemented for this Gateway).
 
-**Please note:** This gateway cannot successfully complete your requests if you don't use an SHA-OUT signature. If you don't set the SHA-OUT signature in the Postfinance backend, callback URLs won't be supplied with the parameters to determine success or failure of a payment-request.
+**Please note:** This gateway cannot successfully complete your requests if you don't use an SHA-OUT signature. If you don't set the SHA-OUT signature in the Postfinance backend, callback URLs won't be supplied with any parameters, which makes it impossible to determine success or failure of a payment-request.
 
 
 ## Basic Usage
