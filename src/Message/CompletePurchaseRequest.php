@@ -70,25 +70,25 @@ class CompletePurchaseRequest extends AbstractRequest
         'TRXDATE',
         'VC'
     );
-    
+
     public function getData()
     {
         $data = array();
-        foreach($this->httpRequest->query as $key => $value){
+        foreach ($this->httpRequest->query as $key => $value) {
             $data[strtoupper($key)] = $value;
         }
 
-        if(isset($data['SHASIGN'])){
+        if (isset($data['SHASIGN'])) {
             $signData = array();
-            foreach($this->signatureParams as $param){
-                if(isset($data[$param])){
+            foreach ($this->signatureParams as $param) {
+                if (isset($data[$param])) {
                     $signData[$param] = $data[$param];
                 }
             }
-            $hash = Helper::create_sha_hash($signData,
+            $hash = Helper::createShaHash($signData,
                 $this->getShaOut(), $this->getHashingMethod());
 
-            if($hash != $data['SHASIGN']){
+            if ($hash != $data['SHASIGN']) {
                 throw new InvalidResponseException;
             }
         }

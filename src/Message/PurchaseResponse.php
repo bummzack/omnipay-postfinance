@@ -46,12 +46,15 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
         // Build the post data as expected by Postfinance.
         $params = $this->getData();
         $postData = array();
-        foreach($params as $key => $value){
+        foreach ($params as $key => $value) {
             $postData[$key] = $value;
         }
 
-        $postData['SHASIGN'] = Helper::create_sha_hash(
-            $postData, $this->getRequest()->getShaIn(), $this->getRequest()->getHashingMethod());
+        $postData['SHASIGN'] = Helper::createShaHash(
+            $postData,
+            $this->getRequest()->getShaIn(),
+            $this->getRequest()->getHashingMethod()
+        );
 
         return $postData;
     }

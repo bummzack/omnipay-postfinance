@@ -481,5 +481,4 @@ class Gateway extends AbstractGateway
     {
         return $this->completePurchase($parameters);
     }
-
 }

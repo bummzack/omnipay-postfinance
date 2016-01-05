@@ -56,24 +56,24 @@ class Helper
     const POSTFINANCE_PAYMENT_PROCESSED_MERCHANT          = 95;
     const POSTFINANCE_PAYMENT_IN_PROGRESS                 = 99;
 
-    public static function string_value($value)
+    public static function stringValue($value)
     {
         // ensure a numeric zero gets converted properly
-        if($value === 0){
+        if ($value === 0) {
             return '0';
         }
 
         return (string)$value;
     }
 
-    public static function create_sha_hash(array $data, $signature, $algorithm = 'sha1')
+    public static function createShaHash(array $data, $signature, $algorithm = 'sha1')
     {
         uksort($data, 'strnatcasecmp');
 
         $hashParts = array();
-        foreach($data as $key => $value){
-            $str = self::string_value($value);
-            if($str == '' || $key == 'SHASIGN'){
+        foreach ($data as $key => $value) {
+            $str = self::stringValue($value);
+            if ($str == '' || $key == 'SHASIGN') {
                 continue;
             }
             $hashParts[] = strtoupper($key) . '=' . $str . $signature;

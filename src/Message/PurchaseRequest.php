@@ -34,16 +34,16 @@ class PurchaseRequest extends AbstractRequest
             'LANGUAGE'  => $this->getLanguage()
         );
 
-        foreach($this->optionalParams as $param){
-            $value = Helper::string_value($this->getParameter($param));
+        foreach ($this->optionalParams as $param) {
+            $value = Helper::stringValue($this->getParameter($param));
 
-            if($value !== ''){
+            if ($value !== '') {
                 $data[strtoupper($param)] = $value;
             }
         }
 
         /** @var CreditCard $card */
-        if($card = $this->getCard()){
+        if ($card = $this->getCard()) {
             $data['CN']             = $card->getName();
             $data['EMAIL']          = $card->getEmail();
             $data['OWNERADDRESS']   = $card->getAddress1() . ($card->getAddress2() ? ' / ' . $card->getAddress2() : '');

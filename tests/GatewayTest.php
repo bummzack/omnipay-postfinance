@@ -46,19 +46,19 @@ class GatewayTest extends GatewayTestCase
         // reconstruct the hashes from the official documentation and ensure we calculate the same hashes
         $this->assertEquals(
             'F4CC376CD7A834D997B91598FA747825A238BE0A',
-            Helper::create_sha_hash($data, 'Mysecretsig1875!?', 'sha1'),
+            Helper::createShaHash($data, 'Mysecretsig1875!?', 'sha1'),
             'SHA-1 hash does not match the excepted output'
         );
 
         $this->assertEquals(
             'E019359BAA3456AE5A986B6AABD22CF1B3E09438739E97F17A7F61DF5A11B30F',
-            Helper::create_sha_hash($data, 'Mysecretsig1875!?', 'sha256'),
+            Helper::createShaHash($data, 'Mysecretsig1875!?', 'sha256'),
             'SHA-256 hash does not match the excepted output'
         );
 
         $this->assertEquals(
             'D1CFE8833A297D0922E908B2B44934B09EE966EF1584DC0D696304E07BB58BA71973C2383C831D878D8A243BB7D7DFFFBE53CEE21955CDFEF44FE82E551F859D',
-            Helper::create_sha_hash($data, 'Mysecretsig1875!?', 'sha512'),
+            Helper::createShaHash($data, 'Mysecretsig1875!?', 'sha512'),
             'SHA-512 hash does not match the excepted output'
         );
 
@@ -78,7 +78,7 @@ class GatewayTest extends GatewayTestCase
 
         $this->assertEquals(
             '209113288F93A9AB8E474EA78D899AFDBB874355',
-            Helper::create_sha_hash($outData, 'Mysecretsig1875!?', 'sha1'),
+            Helper::createShaHash($outData, 'Mysecretsig1875!?', 'sha1'),
             'SHA-OUT hash does not match the excepted output (sha1)'
         );
     }
@@ -107,7 +107,7 @@ class GatewayTest extends GatewayTestCase
         );
 
         // sign the data
-        $data['SHASIGN'] = Helper::create_sha_hash($data, $this->gateway->getShaIn());
+        $data['SHASIGN'] = Helper::createShaHash($data, $this->gateway->getShaIn());
 
         $this->assertInstanceOf('\Omnipay\Postfinance\Message\PurchaseResponse', $response);
         $this->assertFalse($response->isSuccessful());
@@ -156,7 +156,7 @@ class GatewayTest extends GatewayTestCase
         );
 
         // create sha hash for the given data
-        $data['SHASIGN'] = Helper::create_sha_hash($data, $this->gateway->getShaOut());
+        $data['SHASIGN'] = Helper::createShaHash($data, $this->gateway->getShaOut());
 
         $this->getHttpRequest()->query->replace($data);
 
@@ -209,7 +209,7 @@ class GatewayTest extends GatewayTestCase
         );
 
         // create sha hash for the given data
-        $data['SHASIGN'] = Helper::create_sha_hash($data, $this->gateway->getShaOut());
+        $data['SHASIGN'] = Helper::createShaHash($data, $this->gateway->getShaOut());
 
         $this->getHttpRequest()->query->replace($data);
 
@@ -231,7 +231,7 @@ class GatewayTest extends GatewayTestCase
         );
 
         // create sha hash for the given data
-        $data['SHASIGN'] = Helper::create_sha_hash($data, $this->gateway->getShaOut());
+        $data['SHASIGN'] = Helper::createShaHash($data, $this->gateway->getShaOut());
 
         $this->getHttpRequest()->query->replace($data);
 
