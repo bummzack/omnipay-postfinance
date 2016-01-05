@@ -190,7 +190,8 @@ class GatewayTest extends GatewayTestCase
     {
         $response = $this->gateway->authorize($this->options)->send();
 
-        $this->assertEquals('RES', $response->getData()['OPERATION']);
+        $data = $response->getData();
+        $this->assertEquals('RES', $data['OPERATION']);
         $this->assertInstanceOf('\Omnipay\Postfinance\Message\PurchaseResponse', $response);
         $this->assertFalse($response->isSuccessful());
         $this->assertTrue($response->isRedirect());
