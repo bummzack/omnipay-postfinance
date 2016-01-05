@@ -85,8 +85,12 @@ class CompletePurchaseRequest extends AbstractRequest
                     $signData[$param] = $data[$param];
                 }
             }
-            $hash = Helper::createShaHash($signData,
-                $this->getShaOut(), $this->getHashingMethod());
+            
+            $hash = Helper::createShaHash(
+                $signData,
+                $this->getShaOut(),
+                $this->getHashingMethod()
+            );
 
             if ($hash != $data['SHASIGN']) {
                 throw new InvalidResponseException;
