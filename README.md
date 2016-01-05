@@ -1,5 +1,7 @@
 # Omnipay: Postfinance 
 
+[![Build Status](https://api.travis-ci.org/bummzack/omnipay-postfinance.png)](https://travis-ci.org/bummzack/omnipay-postfinance)
+
 Ominpay Gateway for Postfinance.
 
 This Gateway implements offsite payments via Postfinance. Purchase and Authorization are available, capturing an authorized payment has to be performed via Postfinance backend though (not currently implemented for this Gateway).
