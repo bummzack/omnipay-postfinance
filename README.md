@@ -1,13 +1,23 @@
 # Omnipay: Postfinance 
 
+**Postfinance Gateway for the Omnipay PHP payment processing library.**
+
 [![Build Status](https://api.travis-ci.org/bummzack/omnipay-postfinance.png)](https://travis-ci.org/bummzack/omnipay-postfinance)
 
-Ominpay Gateway for Postfinance.
+[Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
+processing library for PHP 5.3+. 
 
-This Gateway implements offsite payments via Postfinance. Purchase and Authorization are available, capturing an authorized payment has to be performed via Postfinance backend though (not currently implemented for this Gateway).
+This Gateway implements offsite payments via Postfinance. Purchase and Authorization are available, capturing an authorized payment has to be performed via Postfinance backend (not currently implemented for this Gateway).
 
 **Please note:** This gateway cannot successfully complete your requests if you don't use an SHA-OUT signature. If you don't set the SHA-OUT signature in the Postfinance backend, callback URLs won't be supplied with any parameters, which makes it impossible to determine success or failure of a payment-request.
 
+## Installation
+
+Omnipay can be installed using [Composer](https://getcomposer.org/). [Installation instructions](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx).
+
+Run the following command to install omnipay and the postfinance gateway:
+
+    composer require bummzack/omnipay-postfinance ~0.1
 
 ## Basic Usage
 
