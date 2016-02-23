@@ -3,6 +3,10 @@
 **Postfinance Gateway for the Omnipay PHP payment processing library.**
 
 [![Build Status](https://api.travis-ci.org/bummzack/omnipay-postfinance.png)](https://travis-ci.org/bummzack/omnipay-postfinance)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bummzack/omnipay-postfinance/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bummzack/omnipay-postfinance/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/bummzack/omnipay-postfinance/v/stable)](https://packagist.org/packages/bummzack/omnipay-postfinance)
+[![Latest Unstable Version](https://poser.pugx.org/bummzack/omnipay-postfinance/v/unstable)](https://packagist.org/packages/bummzack/omnipay-postfinance)
+[![License](https://poser.pugx.org/bummzack/omnipay-postfinance/license)](https://packagist.org/packages/bummzack/omnipay-postfinance)
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP 5.3+. 
