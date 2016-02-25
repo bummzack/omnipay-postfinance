@@ -1,15 +1,16 @@
-# Omnipay: Postfinance 
+# Omnipay: Postfinance
 
 **Postfinance Gateway for the Omnipay PHP payment processing library.**
 
 [![Build Status](https://api.travis-ci.org/bummzack/omnipay-postfinance.png)](https://travis-ci.org/bummzack/omnipay-postfinance)
+[![Code Coverage](https://scrutinizer-ci.com/g/bummzack/omnipay-postfinance/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/bummzack/omnipay-postfinance/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bummzack/omnipay-postfinance/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bummzack/omnipay-postfinance/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/bummzack/omnipay-postfinance/v/stable)](https://packagist.org/packages/bummzack/omnipay-postfinance)
 [![Latest Unstable Version](https://poser.pugx.org/bummzack/omnipay-postfinance/v/unstable)](https://packagist.org/packages/bummzack/omnipay-postfinance)
 [![License](https://poser.pugx.org/bummzack/omnipay-postfinance/license)](https://packagist.org/packages/bummzack/omnipay-postfinance)
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
-processing library for PHP 5.3+. 
+processing library for PHP 5.3+.
 
 This Gateway implements offsite payments via Postfinance. Purchase and Authorization are available, capturing an authorized payment has to be performed via Postfinance backend (not currently implemented for this Gateway).
 
@@ -27,12 +28,12 @@ Run the following command to install omnipay and the postfinance gateway:
 
 Payment requests to the Postfinance Gateway must at least supply the following parameters:
 
- - `pspId` Your postfinance account ID 
- - `transactionId` unique transaction ID 
- - `amount` monetary amount 
+ - `pspId` Your postfinance account ID
+ - `transactionId` unique transaction ID
+ - `amount` monetary amount
  - `currency` currency
  - `language` locale code indicating the customer language preference, example: `en_US`
- 
+
 It is highly recommended to use SHA-IN and -OUT signatures for your requests.
 
 ```php
