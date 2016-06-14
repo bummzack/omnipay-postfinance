@@ -58,6 +58,7 @@ class CompletePurchaseRequest extends AbstractRequest
         'NCERROR',
         'ORDERID',
         'PAYID',
+        'PAYIDSUB',
         'PAYMENT_REFERENCE',
         'PM',
         'SCO_CATEGORY',
@@ -68,7 +69,8 @@ class CompletePurchaseRequest extends AbstractRequest
         'SUBBRAND',
         'SUBSCRIPTION_ID',
         'TRXDATE',
-        'VC'
+        'VC',
+        'WALLET'
     );
 
     public function getData()
