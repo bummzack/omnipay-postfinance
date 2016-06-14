@@ -23,6 +23,16 @@ Omnipay can be installed using [Composer](https://getcomposer.org/). [Installati
 Run the following command to install omnipay and the postfinance gateway:
 
     composer require bummzack/omnipay-postfinance ~0.1
+    
+## Configuration in the Postfinance Backend
+
+This is the easiest way to setup your Postfinance account to work with the Omnipay Gateway:
+
+1. In the **Global Security Parameters** tab, choose **Each parameter followed by the passphrase.** as the way to hash parameters. 
+2. The **Hash algorithm** can be chosen freely, but must be supplied as `hashingMethod` parameter to the gateway if you're using anything else than the default (`sha1`)
+3. Make sure to supply an **SHA-IN pass phrase** in the **Data and origin verification** tab
+4. Under **Transaction feedback**, make sure to check **I would like to receive transaction feedback parameters on the redirection URLs** *and* supply a **SHA-OUT pass phrase**.
+
 
 ## Basic Usage
 
