@@ -6,6 +6,7 @@ php:
   - hhvm
 
 before_script:
+  - composer global require squizlabs/php_codesniffer:^3 --prefer-dist --no-interaction --no-progress --no-suggest -o
   - composer install -n --dev --prefer-source
 
 script: vendor/bin/phpcs --standard=PSR2 src && vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
