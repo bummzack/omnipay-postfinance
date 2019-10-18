@@ -2,14 +2,18 @@ language: php
 
 php:
   - 5.6
+    env:
+      - PHPCS_TEST=1
   - 7.2
   - hhvm
 
 before_script:
-  - composer global require squizlabs/php_codesniffer:^3 --prefer-dist --no-interaction --no-progress --no-suggest -o
+  - if [[ $PHPCS_TEST ]]; then composer global require squizlabs/php_codesniffer:^3 --prefer-dist --no-interaction --no-progress --no-suggest -o; fi
   - composer install -n --dev --prefer-source
 
-script: vendor/bin/phpcs --standard=PSR2 src && vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+script: 
+  - if [[ $PHPCS_TEST ]]; phpcs --standard=PSR2 src; fi
+  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar

@@ -2,7 +2,6 @@
 
 namespace Omnipay\Postfinance\Message;
 
-
 class Helper
 {
     /**
