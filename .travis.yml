@@ -6,14 +6,13 @@ matrix:
       env:
         - PHPCS_TEST=1
     - php: 7.2
-    - php: hhvm
 
 before_script:
   - if [[ $PHPCS_TEST ]]; then composer global require squizlabs/php_codesniffer:^3 --prefer-dist --no-interaction --no-progress --no-suggest -o; fi
   - composer install -n --dev --prefer-source
 
 script: 
-  - if [[ $PHPCS_TEST ]]; then phpcs --standard=PSR2 ./src; fi
+  - if [[ $PHPCS_TEST ]]; then phpcs --standard=PSR2 src; fi
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
 after_script:
