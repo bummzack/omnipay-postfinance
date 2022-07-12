@@ -22,7 +22,7 @@ Omnipay can be installed using [Composer](https://getcomposer.org/). [Installati
 
 Run the following command to install omnipay and the postfinance gateway:
 
-    composer require bummzack/omnipay-postfinance ~0.1
+    composer require bummzack/omnipay-postfinance ~1.0
     
 ## Configuration in the Postfinance Backend
 
